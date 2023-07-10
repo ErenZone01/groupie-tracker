@@ -20,9 +20,10 @@ func serv() {
 }
 
 func handlerPost(w http.ResponseWriter, r *http.Request) {
-	var api = "https://groupietrackers.herokuapp.com/api"
-	_, err := http.Get(api)
+	api, err := http.Get(Api)
 	if err != nil {
+		errorFile(w, r, "Error 500")
+	}else if api.StatusCode == 404{
 		errorFile(w, r, "Error 500")
 	} else {
 		Start()
@@ -60,10 +61,10 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-
-	var api = "https://groupietrackers.herokuapp.com/api"
-	_, err := http.Get(api)
+	api, err := http.Get(Api)
 	if err != nil {
+		errorFile(w, r, "Error 500")
+	}else if api.StatusCode == 404{
 		errorFile(w, r, "Error 500")
 	} else {
 		Start()
